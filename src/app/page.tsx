@@ -46,6 +46,7 @@ export default function Home() {
         body: JSON.stringify({ text }),
       });
 
+
       if (!res.ok) {
         throw new Error('Error en el servidor');
       }
