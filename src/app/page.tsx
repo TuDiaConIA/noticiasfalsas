@@ -51,9 +51,9 @@ export default function Home() {
       }
       const data = await res.json();
       setResult(data);
-    } catch (err: any) {
-      setError(err.message || 'Error desconocido');
-    }
+    } catch (err) {
+        setError((err as Error)?.message || 'Error desconocido');
+      }
     setLoading(false);
   };
 
