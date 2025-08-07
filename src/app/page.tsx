@@ -284,24 +284,6 @@ export default function Home() {
           </GridLegacy>
         </GridLegacy>
       </Container>
-
-      {/* FOOTER */}
-      <Box
-        component="footer"
-        width="100%"
-        sx={{
-          py: 2.5,
-          px: 2,
-          bgcolor: "#162447",
-          color: "#fff",
-          textAlign: "center",
-          fontWeight: 500,
-          letterSpacing: 1,
-          fontSize: { xs: 15, sm: 17 }
-        }}
-      >
-        Hecho por Sara Hidalgo Caro 2025
-      </Box>
     </Box>
   );
 }

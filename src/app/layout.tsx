@@ -39,3 +39,49 @@ export const metadata: Metadata = {
     ],
   },
 };
+
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="es">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable}`}
+        style={{
+          minHeight: "100vh",
+          margin: 0,
+          padding: 0,
+          background: "#f6f9fa",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            minHeight: "100vh",
+            flexDirection: "column",
+          }}
+        >
+          <main style={{ flex: "1 0 auto" }}>{children}</main>
+          <footer
+            style={{
+              width: "100%",
+              textAlign: "center",
+              padding: "24px 0 18px 0",
+              background: "#1976d2",
+              color: "white",
+              fontWeight: 400,
+              letterSpacing: 1,
+              fontSize: 16,
+              borderTopLeftRadius: 32,
+              borderTopRightRadius: 32,
+              boxShadow: "0 0 14px #1976d2aa",
+              flexShrink: 0,
+            }}
+          >
+            Hecho por Sara Hidalgo Caro 2025
+          </footer>
+        </div>
+      </body>
+    </html>
+  );
+}
