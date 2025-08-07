@@ -62,215 +62,241 @@ export default function Home() {
   const percent = result ? extractPercentage(result.openai_analysis) : 0;
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 6, mb: 8 }}>
-      <CssBaseline />
-      <GridLegacy container spacing={4} justifyContent="center">
-        {/* COLUMNA IZQUIERDA SEO */}
-        <GridLegacy item xs={12} md={4} sx={{ display: { xs: "none", md: "block" } }}>
-          <Paper elevation={0} sx={{ p: 3, background: "transparent", color: "#154078", fontSize: 17, lineHeight: 1.7 }}>
-            <h2 style={{ fontWeight: 700, fontSize: 22, marginTop: 0, marginBottom: 10 }}>
-              ¿Por qué es importante verificar noticias falsas?
-            </h2>
-            <p>
-              Las <b>noticias falsas</b> y los <b>bulos</b> pueden manipular la opinión pública, crear confusión y dañar la confianza en los medios.
-              La <b>verificación de noticias</b> ayuda a combatir la <b>desinformación</b> y protege la sociedad de fraudes, timos y rumores.
-            </p>
-            <ul>
-              <li>Evita la <b>propagación de bulos</b> en redes sociales</li>
-              <li>Identifica <b>fuentes fiables</b> y periodismo de calidad</li>
-              <li>Reduce el impacto de <b>fake news</b> en elecciones y salud pública</li>
-            </ul>
-            <p>
-              Usa nuestro <b>verificador de noticias falsas</b> con <b>inteligencia artificial</b> para analizar titulares, textos o enlaces y descubrir la <b>veracidad de la información</b> en tiempo real.
-            </p>
-          </Paper>
-        </GridLegacy>
+    <Box
+      minHeight="100vh"
+      display="flex"
+      flexDirection="column"
+      justifyContent="space-between"
+      bgcolor="#f3f6fa"
+    >
+      <Container maxWidth="lg" sx={{ mt: 6, mb: 8, flexGrow: 1 }}>
+        <CssBaseline />
+        <GridLegacy container spacing={4} justifyContent="center">
+          {/* COLUMNA IZQUIERDA SEO */}
+          <GridLegacy item xs={12} md={4} sx={{ display: { xs: "none", md: "block" } }}>
+            <Paper elevation={0} sx={{ p: 3, background: "transparent", color: "#154078", fontSize: 17, lineHeight: 1.7 }}>
+              <h2 style={{ fontWeight: 700, fontSize: 22, marginTop: 0, marginBottom: 10 }}>
+                ¿Por qué es importante verificar noticias falsas?
+              </h2>
+              <p>
+                Las <b>noticias falsas</b> y los <b>bulos</b> pueden manipular la opinión pública, crear confusión y dañar la confianza en los medios.
+                La <b>verificación de noticias</b> ayuda a combatir la <b>desinformación</b> y protege la sociedad de fraudes, timos y rumores.
+              </p>
+              <ul>
+                <li>Evita la <b>propagación de bulos</b> en redes sociales</li>
+                <li>Identifica <b>fuentes fiables</b> y periodismo de calidad</li>
+                <li>Reduce el impacto de <b>fake news</b> en elecciones y salud pública</li>
+              </ul>
+              <p>
+                Usa nuestro <b>verificador de noticias falsas</b> con <b>inteligencia artificial</b> para analizar titulares, textos o enlaces y descubrir la <b>veracidad de la información</b> en tiempo real.
+              </p>
+            </Paper>
+          </GridLegacy>
 
-        {/* CENTRO: APP PRINCIPAL */}
-        <GridLegacy item xs={12} md={4}>
-          <Paper elevation={6} sx={{ p: { xs: 2, sm: 4 }, mb: 4, borderRadius: 5, background: "white" }}>
-            <Box display="flex" flexDirection="column" alignItems="center" mb={2}>
-              <Image
-                src="/favicon.ico"
-                alt="Escudo de verificación de noticias"
-                width={48}
-                height={48}
-                priority
-                style={{ borderRadius: '100%', marginBottom: 8, boxShadow: "0 2px 12px #1976d2bb" }}
-              />
-              <Typography variant="h1" component="h1" sx={{
-                fontSize: { xs: 28, sm: 38 },
-                fontWeight: 700,
-                letterSpacing: 1,
-                textAlign: "center",
-                color: "#1a237e",
-                mb: 1
-              }}>
-                Verificador de Noticias Falsas con IA
-              </Typography>
-              <Typography variant="subtitle1" sx={{
-                color: "#1976d2",
-                textAlign: "center",
-                fontSize: 18,
-                mt: 0,
-                mb: 2
-              }}>
-                Detector de bulos, fake news y enlaces sospechosos.<br />
-                Analiza titulares, textos o URLs al instante con inteligencia artificial y fuentes científicas.
-              </Typography>
-            </Box>
-
-            <form onSubmit={handleSubmit} aria-label="Formulario verificador de noticias falsas">
-              <TextField
-                label="Introduce una noticia, titular o enlace a verificar..."
-                variant="outlined"
-                fullWidth
-                value={text}
-                onChange={e => { setText(e.target.value); setError(''); }}
-                disabled={loading}
-                sx={{ mb: 2, background: "#f0f6fc", borderRadius: 2 }}
-                required
-                autoFocus
-                inputProps={{
-                  'aria-label': "Campo de texto para noticia o enlace"
-                }}
-              />
-              <Box display="flex" justifyContent="center">
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  disabled={loading}
-                  sx={{
-                    minWidth: 180,
-                    borderRadius: 2,
-                    fontWeight: 600,
-                    boxShadow: "0 3px 16px #1976d244",
-                    letterSpacing: 1,
-                    fontSize: 18
-                  }}
-                  aria-label="Verificar noticia o enlace"
-                >
-                  {loading ? (
-                    <>
-                      <CircularProgress size={22} sx={{ mr: 1 }} />
-                      Analizando...
-                    </>
-                  ) : (
-                    'VERIFICAR'
-                  )}
-                </Button>
-              </Box>
-            </form>
-            {error && (
-              <Typography color="error" align="center" sx={{ mt: 2 }}>
-                {error}
-              </Typography>
-            )}
-          </Paper>
-
-          {/* RESULTADO */}
-          {result && !loading && (
-            <Card sx={{
-              boxShadow: 5,
-              mt: 3,
-              mb: 4,
-              borderRadius: 4,
-              background: "#f8fafc",
-            }}>
-              <CardContent>
-                <Box textAlign="center" sx={{ mb: 2 }}>
-                  <Typography variant="h2" sx={{
-                    fontSize: { xs: 22, sm: 28 },
-                    fontWeight: 700,
-                    color: "#1565c0",
-                    mb: 1
-                  }}>
-                    Porcentaje de veracidad estimado
-                  </Typography>
-                  <Typography variant="h1" fontWeight={700} sx={{
-                    fontSize: { xs: 42, sm: 64 },
-                    mb: 1,
-                    color: percent > 50 ? "#2e7d32" : "#d32f2f"
-                  }}>
-                    {percent}%
-                  </Typography>
-                  <LinearProgress
-                    variant="determinate"
-                    value={percent}
-                    sx={{
-                      height: 18,
-                      borderRadius: 9,
-                      backgroundColor: "#e3eafc",
-                      '& .MuiLinearProgress-bar': {
-                        borderRadius: 9,
-                      }
-                    }}
-                    aria-label="Barra de porcentaje de veracidad"
-                  />
-                  <Typography variant="body1" sx={{ color: "#555", mt: 1 }}>
-                    Porcentaje de veracidad: <strong>{percent}%</strong>
-                  </Typography>
-                </Box>
-                <Typography
-                  component="section"
-                  sx={{
-                    whiteSpace: 'pre-wrap',
-                    background: '#f7f7f7',
-                    p: 2.2,
-                    borderRadius: 2,
-                    mb: 3,
-                    fontSize: 17,
-                    fontFamily: 'inherit'
-                  }}
-                >
-                  {result.openai_analysis}
-                </Typography>
-                <Typography variant="h3" component="h2" sx={{
-                  fontSize: 22,
-                  fontWeight: 600,
-                  color: "#1976d2",
-                  mb: 1,
-                  mt: 1
+          {/* CENTRO: APP PRINCIPAL */}
+          <GridLegacy item xs={12} md={4}>
+            <Paper elevation={6} sx={{ p: { xs: 2, sm: 4 }, mb: 4, borderRadius: 5, background: "white" }}>
+              <Box display="flex" flexDirection="column" alignItems="center" mb={2}>
+                <Image
+                  src="/favicon.ico"
+                  alt="Escudo de verificación de noticias"
+                  width={48}
+                  height={48}
+                  priority
+                  style={{ borderRadius: '100%', marginBottom: 8, boxShadow: "0 2px 12px #1976d2bb" }}
+                />
+                <Typography variant="h1" component="h1" sx={{
+                  fontSize: { xs: 28, sm: 38 },
+                  fontWeight: 700,
+                  letterSpacing: 1,
+                  textAlign: "center",
+                  color: "#1a237e",
+                  mb: 1
                 }}>
-                  Fuentes encontradas
+                  Verificador de Noticias Falsas con IA
                 </Typography>
-                <List sx={{ mb: 1 }}>
-                  {result.sources.length === 0 && <ListItem>No se encontraron fuentes.</ListItem>}
-                  {result.sources.map((src: Source, i: number) => (
-                    <ListItem key={i} sx={{ display: 'list-item', mb: 1 }}>
-                      <Link href={src.url} target="_blank" rel="noopener noreferrer" underline="hover">
-                        {src.title}
-                      </Link>
-                    </ListItem>
-                  ))}
-                </List>
-              </CardContent>
-            </Card>
-          )}
-        </GridLegacy>
+                <Typography variant="subtitle1" sx={{
+                  color: "#1976d2",
+                  textAlign: "center",
+                  fontSize: 18,
+                  mt: 0,
+                  mb: 2
+                }}>
+                  Detector de bulos, fake news y enlaces sospechosos.<br />
+                  Analiza titulares, textos o URLs al instante con inteligencia artificial y fuentes científicas.
+                </Typography>
+              </Box>
 
-        {/* COLUMNA DERECHA SEO */}
-        <GridLegacy item xs={12} md={4} sx={{ display: { xs: "none", md: "block" } }}>
-          <Paper elevation={0} sx={{ p: 3, background: "transparent", color: "#154078", fontSize: 17, lineHeight: 1.7 }}>
-            <h2 style={{ fontWeight: 700, fontSize: 22, marginTop: 0, marginBottom: 10 }}>
-              Consejos para identificar noticias falsas
-            </h2>
-            <ul>
-              <li>Verifica siempre la <b>fuente original</b> y el <b>autor</b></li>
-              <li>Duda de los titulares sensacionalistas o alarmistas</li>
-              <li>Contrasta la noticia en <b>medios fiables y oficiales</b></li>
-              <li>Evita compartir información dudosa sin comprobarla</li>
-              <li>Consulta plataformas de <b>fact-checking</b> y organismos oficiales</li>
-              <li>La <b>IA</b> te ayuda, pero usa siempre el <b>pensamiento crítico</b></li>
-            </ul>
-            <p>
-              Contribuye a una <b>internet más segura y libre de fake news</b>. Nuestro <b>detector de bulos</b> está optimizado para el <b>análisis de noticias en español</b>.
-            </p>
-          </Paper>
+              <form onSubmit={handleSubmit} aria-label="Formulario verificador de noticias falsas">
+                <TextField
+                  label="Introduce una noticia, titular o enlace a verificar..."
+                  variant="outlined"
+                  fullWidth
+                  value={text}
+                  onChange={e => { setText(e.target.value); setError(''); }}
+                  disabled={loading}
+                  sx={{ mb: 2, background: "#f0f6fc", borderRadius: 2 }}
+                  required
+                  autoFocus
+                  inputProps={{
+                    'aria-label': "Campo de texto para noticia o enlace"
+                  }}
+                />
+                <Box display="flex" justifyContent="center">
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    disabled={loading}
+                    sx={{
+                      minWidth: 180,
+                      borderRadius: 2,
+                      fontWeight: 600,
+                      boxShadow: "0 3px 16px #1976d244",
+                      letterSpacing: 1,
+                      fontSize: 18
+                    }}
+                    aria-label="Verificar noticia o enlace"
+                  >
+                    {loading ? (
+                      <>
+                        <CircularProgress size={22} sx={{ mr: 1 }} />
+                        Analizando...
+                      </>
+                    ) : (
+                      'VERIFICAR'
+                    )}
+                  </Button>
+                </Box>
+              </form>
+              {error && (
+                <Typography color="error" align="center" sx={{ mt: 2 }}>
+                  {error}
+                </Typography>
+              )}
+            </Paper>
+
+            {/* RESULTADO */}
+            {result && !loading && (
+              <Card sx={{
+                boxShadow: 5,
+                mt: 3,
+                mb: 4,
+                borderRadius: 4,
+                background: "#f8fafc",
+              }}>
+                <CardContent>
+                  <Box textAlign="center" sx={{ mb: 2 }}>
+                    <Typography variant="h2" sx={{
+                      fontSize: { xs: 22, sm: 28 },
+                      fontWeight: 700,
+                      color: "#1565c0",
+                      mb: 1
+                    }}>
+                      Porcentaje de veracidad estimado
+                    </Typography>
+                    <Typography variant="h1" fontWeight={700} sx={{
+                      fontSize: { xs: 42, sm: 64 },
+                      mb: 1,
+                      color: percent > 50 ? "#2e7d32" : "#d32f2f"
+                    }}>
+                      {percent}%
+                    </Typography>
+                    <LinearProgress
+                      variant="determinate"
+                      value={percent}
+                      sx={{
+                        height: 18,
+                        borderRadius: 9,
+                        backgroundColor: "#e3eafc",
+                        '& .MuiLinearProgress-bar': {
+                          borderRadius: 9,
+                        }
+                      }}
+                      aria-label="Barra de porcentaje de veracidad"
+                    />
+                    <Typography variant="body1" sx={{ color: "#555", mt: 1 }}>
+                      Porcentaje de veracidad: <strong>{percent}%</strong>
+                    </Typography>
+                  </Box>
+                  <Typography
+                    component="section"
+                    sx={{
+                      whiteSpace: 'pre-wrap',
+                      background: '#f7f7f7',
+                      p: 2.2,
+                      borderRadius: 2,
+                      mb: 3,
+                      fontSize: 17,
+                      fontFamily: 'inherit'
+                    }}
+                  >
+                    {result.openai_analysis}
+                  </Typography>
+                  <Typography variant="h3" component="h2" sx={{
+                    fontSize: 22,
+                    fontWeight: 600,
+                    color: "#1976d2",
+                    mb: 1,
+                    mt: 1
+                  }}>
+                    Fuentes encontradas
+                  </Typography>
+                  <List sx={{ mb: 1 }}>
+                    {result.sources.length === 0 && <ListItem>No se encontraron fuentes.</ListItem>}
+                    {result.sources.map((src: Source, i: number) => (
+                      <ListItem key={i} sx={{ display: 'list-item', mb: 1 }}>
+                        <Link href={src.url} target="_blank" rel="noopener noreferrer" underline="hover">
+                          {src.title}
+                        </Link>
+                      </ListItem>
+                    ))}
+                  </List>
+                </CardContent>
+              </Card>
+            )}
+          </GridLegacy>
+
+          {/* COLUMNA DERECHA SEO */}
+          <GridLegacy item xs={12} md={4} sx={{ display: { xs: "none", md: "block" } }}>
+            <Paper elevation={0} sx={{ p: 3, background: "transparent", color: "#154078", fontSize: 17, lineHeight: 1.7 }}>
+              <h2 style={{ fontWeight: 700, fontSize: 22, marginTop: 0, marginBottom: 10 }}>
+                Consejos para identificar noticias falsas
+              </h2>
+              <ul>
+                <li>Verifica siempre la <b>fuente original</b> y el <b>autor</b></li>
+                <li>Duda de los titulares sensacionalistas o alarmistas</li>
+                <li>Contrasta la noticia en <b>medios fiables y oficiales</b></li>
+                <li>Evita compartir información dudosa sin comprobarla</li>
+                <li>Consulta plataformas de <b>fact-checking</b> y organismos oficiales</li>
+                <li>La <b>IA</b> te ayuda, pero usa siempre el <b>pensamiento crítico</b></li>
+              </ul>
+              <p>
+                Contribuye a una <b>internet más segura y libre de fake news</b>. Nuestro <b>detector de bulos</b> está optimizado para el <b>análisis de noticias en español</b>.
+              </p>
+            </Paper>
+          </GridLegacy>
         </GridLegacy>
-      </GridLegacy>
-    </Container>
+      </Container>
+
+      {/* FOOTER SIEMPRE ABAJO */}
+      <Box
+        component="footer"
+        width="100%"
+        sx={{
+          py: 2.5,
+          px: 2,
+          bgcolor: "#162447",
+          color: "#fff",
+          textAlign: "center",
+          fontWeight: 500,
+          letterSpacing: 1,
+          fontSize: { xs: 15, sm: 17 }
+        }}
+      >
+        Hecho por Sara Hidalgo Caro 2025
+      </Box>
+    </Box>
   );
 }
